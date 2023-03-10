@@ -21,7 +21,7 @@ const pool = new Pool({
   app.post('/usuarios', async (req, res) => {
     const { nome, email } = req.body;
     try {
-      const { rows } = await db.query('INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING *', [nome, email]);
+      const { rows } = await pool.query('INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING *', [nome, email]);
       res.json(rows[0]);
     } catch (error) {
       console.error(error);
