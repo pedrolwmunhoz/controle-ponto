@@ -28,7 +28,7 @@ class User {
   async save(user) {
     const query = {
         text: 'SELECT * FROM usuarios WHERE nome = $1',
-        values: [user.nome],
+        values: [user.name],
       };
   
       try {
