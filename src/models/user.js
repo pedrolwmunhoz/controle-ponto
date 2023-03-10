@@ -30,29 +30,30 @@ class User {
         text: 'SELECT * FROM usuarios WHERE nome = $1',
         values: [user.email],
       };
-  
+
       try {
         const result = await db.query(query);
         if (result.rowCount > 0) {
           throw new Error('Usuário já existe');
+
+        }else{
+
+            // Insere o usuário no banco de dados
+            const insertQuery = {
+                text: 'INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING id',
+                values: [user.name, user.email],
+            };
+            try {
+                const result = await db.query(insertQuery);
+                this.id = result.rows[0].id;
+            } catch (error) {
+                console.error(error);
+                throw new Error('Erro ao inserir usuário no banco de dados');
+            }
         }
       } catch (error) {
         console.error(error);
         throw new Error('Erro ao verificar se o usuário já existe');
-      }
-  
-      // Insere o usuário no banco de dados
-      const insertQuery = {
-        text: 'INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING id',
-        values: [user.name, user.email],
-      };
-  
-      try {
-        const result = await db.query(insertQuery);
-        this.id = result.rows[0].id;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Erro ao inserir usuário no banco de dados');
       }
     }
 
