@@ -15,7 +15,7 @@ module.exports = {
   async addLogs(req, res){
     const { userId } = req.body;
     try {
-        const newLog = await Log.createLog(pool, userId);
+        const newLog = await Log.createLog(userId);
         res.status(201).json(newLog);
     } catch (err) {
         console.error(err.message);

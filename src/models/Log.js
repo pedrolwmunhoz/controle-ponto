@@ -16,7 +16,10 @@ class Log {
     }
   }
 
-
+  static async createLog(userId) {
+    const res = await pool.query('INSERT INTO log_batimentos (usuario_id) VALUES ($1, $2) RETURNING *', [userId]);
+    return res.rows[0];
+  }
 }
 
 module.exports = Log;
