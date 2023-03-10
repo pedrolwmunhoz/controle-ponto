@@ -16,7 +16,7 @@ const logController = require('./controllers/logController');
   app.post('/users', usersController.addUser);
 
   //GET USERS
-  app.get('/users', usersController.getUsersByName);
+  app.get('/users:name', usersController.getUsersByName);
 
   //GET LOGs
   app.get('/logs/:userId', logController.findByUserId);
