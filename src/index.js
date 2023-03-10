@@ -21,7 +21,6 @@ const logController = require('./controllers/logController');
   //GET LOGs
   app.get('/logs/:userId', logController.findByUserId);
 
-
   //ADD log
   app.get('/logs', logController.addLogs);
 

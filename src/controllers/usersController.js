@@ -3,7 +3,7 @@
 const User = require('../models/user');
 
 async function getUsersByName(req, res) {
-    const name = req.body.name;
+    const name = req.params.name;
     try {
       const users = await User.findByUserName(name);
       res.status(200).json(users);
