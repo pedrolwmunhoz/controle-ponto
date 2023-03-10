@@ -1,5 +1,5 @@
 const express = require('express');
-const { Pool } = require('pg');
+
 require('dotenv').config
 const cors = require('cors');
 
@@ -8,37 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const usersController = require('./controllers/usersController');
 
-const pool = new Pool({
-    user: 'nhemqdot',
-    host: 'babar.db.elephantsql.com',
-    database: 'nhemqdot',
-    password: 'fkPqvHRH56rss2OCMZSN9pc85rgXQN7m',
-  });
-  
-  
   //ADD USER
-  app.post('/usuarios', async (req, res) => {
-    const { nome, email } = req.body;
-    try {
-      const { rows } = await pool.query('INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING *', [nome, email]);
-      res.json(rows[0]);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Erro ao cadastrar usuário');
-    }
-  });
+  app.post('/users', usersController.addUser);
 
   //GET USERS
-  app.get('/usuarios', async (req, res) => {
-    try {
-      const { rows } = await pool.query('SELECT * FROM usuarios');
-      res.json(rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Erro ao buscar usuários');
-    }
-  });
+  app.get('/users/:name', usersController.getUsersByName);
 
   //GET LOGs
   app.get('/logs/:id_usuario', async (req, res) => {
