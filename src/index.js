@@ -1,8 +1,11 @@
 const express = require('express');
 const { Pool } = require('pg');
 require('dotenv').config
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
+
 
 const pool = new Pool({
     user: 'nhemqdot',
