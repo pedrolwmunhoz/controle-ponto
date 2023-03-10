@@ -44,7 +44,7 @@ const pool = new Pool({
   app.get('/logs/:id_usuario', async (req, res) => {
     const { id_usuario } = req.params;
     try {
-      const { rows } = await pool.query('SELECT * FROM log_batimentos WHERE id_usuario = $1', [id_usuario]);
+      const { rows } = await pool.query('SELECT * FROM log_batimentos WHERE id = $1', [id_usuario]);
       res.json(rows);
     } catch (error) {
       console.error(error);
@@ -52,9 +52,10 @@ const pool = new Pool({
     }
   });
 
+  //ADD log
   app.post('/logs', async (req, res) => {
     const { usuario_id } = req.body;
-    const query = 'INSERT INTO log_batimentos (usuario_id, data_hora) VALUES ($1, CURRENT_TIMESTAMP)';
+    const query = 'INSERT INTO log_batimentos (id, data_hora) VALUES ($1, CURRENT_TIMESTAMP)';
   
     try {
       await pool.query(query, [usuario_id]);
