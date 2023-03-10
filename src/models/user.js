@@ -25,10 +25,10 @@ class User {
   }
 
   //Add users
-  async save() {
+  async save(user) {
     const query = {
         text: 'SELECT * FROM usuarios WHERE nome = $1',
-        values: [this.email],
+        values: [user.email],
       };
   
       try {
@@ -44,7 +44,7 @@ class User {
       // Insere o usuário no banco de dados
       const insertQuery = {
         text: 'INSERT INTO usuarios (nome, email) VALUES ($1, $2) RETURNING id',
-        values: [this.name, this.email],
+        values: [user.name, user.email],
       };
   
       try {

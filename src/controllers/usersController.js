@@ -16,8 +16,10 @@ async function getUsersByName(req, res) {
 async function addUser(req, res) {
   const { name, email } = req.body;
   const user = new User(name, email);
+  console.log('teste' + name)
+  console.log('teste' + email)
   try {
-    await user.save();
+    await user.save(user);
     res.status(201).json(user);
   } catch (error) {
     console.error(error);
