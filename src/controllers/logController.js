@@ -2,7 +2,7 @@ const Log = require('../models/Log');
 
 module.exports = {
   async findByUserId(req, res) {
-    const userId = req.params.userId;
+    const { userId } = req.params;
     try {
       const logs = await Log.findByUserId(userId);
       res.json(logs);
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   async addLogs(req, res){
-    const { userId } = req.body;
+    const { userId } = req.params;
     try {
         const newLog = await Log.createLog(userId);
         res.status(201).json(newLog);

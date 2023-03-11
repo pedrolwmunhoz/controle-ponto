@@ -11,18 +11,17 @@ app.use(cors());
 const usersController = require('./controllers/usersController');
 const logController = require('./controllers/logController');
 
+  //GET USERS
+  app.get('/users/:name', usersController.getUsersByName);
 
   //ADD USER
   app.post('/users', usersController.addUser);
-
-  //GET USERS
-  app.get('/users:name', usersController.getUsersByName);
 
   //GET LOGs
   app.get('/logs/:userId', logController.findByUserId);
 
   //ADD log
-  app.get('/logs', logController.addLogs);
+  app.post('/logs/:userId', logController.addLogs);
 
 
 const PORT = process.env.PORT || 3000;

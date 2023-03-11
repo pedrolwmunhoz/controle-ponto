@@ -9,7 +9,7 @@ class Log {
   static async findByUserId(userId) {
     try {
       const result = await pool.query('SELECT * FROM log_batimentos WHERE usuario_id = $1', [userId]);
-      return result.rows.map(row => new Log(row.id, row.user_id, row.date));
+      return result.rows;
     } catch (error) {
       console.error(error);
       throw new Error('Erro ao buscar logs de acesso');
@@ -17,7 +17,7 @@ class Log {
   }
 
   static async createLog(userId) {
-    const res = await pool.query('INSERT INTO log_batimentos (usuario_id) VALUES ($1, $2) RETURNING *', [userId]);
+    const res = await pool.query('INSERT INTO log_batimentos (usuario_id, data_hora) VALUES ($1, $2) RETURNING *', [userId, new Date]);
     return res.rows[0];
   }
 }
