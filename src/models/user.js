@@ -25,7 +25,7 @@ class User {
   }
 
   //Add users
-  static async save(user) {
+  async save(user) {
 
     //verificação de usuario existente
     const query = {
