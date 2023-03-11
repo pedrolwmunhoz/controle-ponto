@@ -1,6 +1,6 @@
 // user.js
 
-const db = require('../dbConfig');
+const db = require('../config/dbConfig');
 
 class User {
   constructor(name, email) {
