@@ -9,7 +9,7 @@ async function getUsersByName(req, res) {
       res.status(200).json(users);
     } catch (error) {
       console.error(error);
-      res.status(500).send( 'Erro ao buscar usuários por nome' );
+      res.status(500).send('Erro ao buscar usuários por nome' );
     }
 }
 
