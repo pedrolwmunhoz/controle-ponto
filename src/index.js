@@ -21,7 +21,7 @@ const logController = require('./controllers/logController');
   app.get('/logs/:userId', logController.findByUserId);
 
   //ADD log
-  app.post('/logs/:userId', logController.addLogs);
+  app.post('/logs/:userId&:date', logController.addLogs);
 
 
 const PORT = process.env.PORT || 3000;

@@ -16,8 +16,8 @@ class Log {
     }
   }
 
-  static async createLog(userId) {
-    const res = await pool.query('INSERT INTO log_batimentos (usuario_id, data_hora) VALUES ($1, $2) RETURNING *', [userId, new Date]);
+  static async createLog(userId, date) {
+    const res = await pool.query('INSERT INTO log_batimentos (usuario_id, data_hora) VALUES ($1, $2) RETURNING *', [userId, date]);
     return res.rows[0];
   }
 }
